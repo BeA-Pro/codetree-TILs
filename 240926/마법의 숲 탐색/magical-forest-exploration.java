@@ -77,7 +77,7 @@ public class Main {
 
         curx = x;
         cury = y;
-        if(y<=1) return false;
+        if(y<=2) return false;
         return true;
     }
 
