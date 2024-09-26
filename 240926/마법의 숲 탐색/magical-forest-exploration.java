@@ -84,7 +84,7 @@ public class Main {
     static int center_move(){
         Queue<pos> q = new LinkedList<>();
         q.add(new pos(cury,curx));
-        System.out.println(cury+" "+curx);
+        // System.out.println(cury+" "+curx);
         boolean[][] visit = new boolean [R+2][C];
         visit[cury][curx] = true;
         int max = cury;
@@ -103,7 +103,7 @@ public class Main {
                 }
             }
         }
-        System.out.println(max);
+        // System.out.println(max);
         return max;
     }
 
@@ -122,16 +122,15 @@ public class Main {
             int di = Integer.parseInt(input[1]);
             if(!down(ci,di,num)){
                 map = new int[R+2][C];
-                down(ci,di,num);
-            }
-            System.out.println("check2");
-            for(int i=0;i<R+2;i++){
-                for(int j=0;j<C;j++){
-                    System.out.printf("%d ",map[i][j]);
-                }
-            System.out.println();
-            }
-            answer += center_move() - 1;
+            }else answer += center_move() - 1;
+            // System.out.println("check2");
+            // for(int i=0;i<R+2;i++){
+            //     for(int j=0;j<C;j++){
+            //         System.out.printf("%d ",map[i][j]);
+            //     }
+            // System.out.println();
+            // }
+
         }
         System.out.println(answer);
     }
