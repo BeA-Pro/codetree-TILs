@@ -20,7 +20,7 @@ public class Main {
         map[y+1][x]= map[y-1][x]= map[y][x+1]= map[y][x-1]= map[y][x] = 0;
     }
     static boolean check(int y, int x){
-        if(y+1 == R + 2 || x - 1 < 0 || x + 1 == C) return false; // 범위 밖으로 나가는 경우
+        if(y+1 == R + 3 || x - 1 < 0 || x + 1 == C) return false; // 범위 밖으로 나가는 경우
         if(map[y+1][x]!=0 || map[y-1][x]!=0 || map[y][x+1]!=0 || map[y][x-1]!=0 || map[y][x]!=0) return false; // 다른 블록이 있는 경우
         return true;
     }
@@ -35,15 +35,15 @@ public class Main {
 
     public static boolean down(int ci, int dir, int num){
         int y = 1, x = ci;
-        if(!check(y,x)) return false;
-        move(y,x,dir,num);
-        // System.out.println("check");
-        // for(int i=0;i<R+2;i++){
-        //     for(int j=0;j<C;j++){
-        //         System.out.printf("%d ",map[i][j]);
-        //     }
-        //     System.out.println();
-        // }
+        // if(!check(y,x)) return false;
+        // move(y,x,dir,num);
+        // // System.out.println("check");
+        // // for(int i=0;i<R+2;i++){
+        // //     for(int j=0;j<C;j++){
+        // //         System.out.printf("%d ",map[i][j]);
+        // //     }
+        // //     System.out.println();
+        // // }
         while(true){
             // System.out.println(y + " "+x);
             clean(y,x);
@@ -77,7 +77,7 @@ public class Main {
 
         curx = x;
         cury = y;
-        if(y<=2) return false;
+        if(y<=3) return false;
         return true;
     }
 
@@ -85,7 +85,7 @@ public class Main {
         Queue<pos> q = new LinkedList<>();
         q.add(new pos(cury,curx));
         // System.out.println(cury+" "+curx);
-        boolean[][] visit = new boolean [R+2][C];
+        boolean[][] visit = new boolean [R+3][C];
         visit[cury][curx] = true;
         int max = cury;
         
@@ -95,7 +95,7 @@ public class Main {
             max = Math.max(cur.y,max);
             for(int i=0;i<4;i++){
                 int ny = dy[i]+cur.y, nx = dx[i]+cur.x;
-                if(!(0<=ny && ny<R+2 && 0<=nx && nx<C)) continue;
+                if(!(0<=ny && ny<R+3 && 0<=nx && nx<C)) continue;
                 if(map[ny][nx] == 0 || visit[ny][nx]) continue; 
                 if(num < 0 || map[ny][nx] == num || map[ny][nx] == - num){
                     q.add(new pos(ny,nx));
@@ -103,7 +103,7 @@ public class Main {
                 }
             }
         }
-        // System.out.println(max);
+        //System.out.println(max - 2);
         return max;
     }
 
@@ -114,19 +114,19 @@ public class Main {
         R = Integer.parseInt(input[0]);
         C = Integer.parseInt(input[1]);
         K = Integer.parseInt(input[2]);
-        map = new int[R+2][C];
+        map = new int[R+3][C];
         int answer = 0;
         for(int num=1;num<=K;num++){
             input = br.readLine().trim().split(" ");
             int ci = Integer.parseInt(input[0]) - 1;
             int di = Integer.parseInt(input[1]);
             if(!down(ci,di,num)){
-                map = new int[R+2][C];
-            }else answer += center_move() - 1;
+                map = new int[R+3][C];
+            }else answer += center_move() - 2;
             // System.out.println("check2");
             // for(int i=0;i<R+2;i++){
             //     for(int j=0;j<C;j++){
-            //         System.out.printf("%d ",map[i][j]);
+            //         System.out.printf("%2d ",map[i][j]);
             //     }
             // System.out.println();
             // }
