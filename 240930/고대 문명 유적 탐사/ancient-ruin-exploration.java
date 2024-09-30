@@ -138,8 +138,8 @@ public class Main {
                     }else if(score == answer){
                         boolean flag = false;
                         if(angle < ans_a) flag = true;
-                        else if(ans_a == angle && i < ans_y) flag = true;
-                        else if(ans_a == angle && i == ans_y && j < ans_x) flag = true;
+                        else if(ans_a == angle && j < ans_x) flag = true;
+                        else if(ans_a == angle && j == ans_x && i < ans_y) flag = true;
                         
                         if(flag){
                             answer = score;
